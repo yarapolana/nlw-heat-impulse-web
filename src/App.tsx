@@ -1,6 +1,9 @@
+import styles from './styles/App.module.scss'
+
 export function App() {
 
   return (
-    <h1>Hello Yara</h1>
+    <main className={styles.contentWrapper}>
+    </main>
   )
 }

@@ -57,6 +57,18 @@ export function AuthProvider({ children }: IAuthProviderProps) {
     }
   }, [])
 
+  useEffect(() => {
+    const token = localStorage.getItem(TOKEN_STORAGE)
+
+    if (token) {
+      api.defaults.headers.common.Authorization = `Bearer ${token}`
+
+      api.get<IUser>('profile').then(response => {
+        setUser(response.data)
+      })
+    }
+  }, [])
+
   return (
     <AuthContext.Provider value={{
       user,

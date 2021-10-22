@@ -23,6 +23,7 @@ interface IAuthProviderProps {
   children: ReactNode
 }
 
+const TOKEN_STORAGE = '@dowhile:token'
 const signInURL = `https://github.com/login/oauth/authorize?scope=user&client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_REDIRECT_URL}`
 
 export const AuthContext = createContext({} as IAuthContextData)
@@ -36,7 +37,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
     }).then(response => {
       setUser(response.data.user)
 
-      localStorage.setItem('@dowhile:token', response.data.token)
+      localStorage.setItem(TOKEN_STORAGE, response.data.token)
 
       api.defaults.headers.common['Bearer Token']
     })

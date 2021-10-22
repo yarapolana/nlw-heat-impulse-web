@@ -17,6 +17,7 @@ interface ISignInResponse {
 interface IAuthContextData {
   user: IUser | null
   signInURL: string
+  signOut(): void
 }
 
 interface IAuthProviderProps {
@@ -41,6 +42,11 @@ export function AuthProvider({ children }: IAuthProviderProps) {
 
       api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`
     })
+  }
+
+  async function signOut() {
+    setUser(null)
+    localStorage.removeItem(TOKEN_STORAGE)
   }
 
   useEffect(() => {
@@ -72,6 +78,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
   return (
     <AuthContext.Provider value={{
       user,
+      signOut,
       signInURL
     }}>
       {children}

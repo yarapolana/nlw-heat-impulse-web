@@ -8,7 +8,7 @@ export function App() {
   const { user } = useAuth()
 
   return (
-    <main className={styles.contentWrapper}>
+    <main className={`${styles.contentWrapper} ${!!user ? styles.contentSigned: ''}`}>
       <MessageList />
       { !!user ? <SendMessageForm /> : <LoginBox /> }
     </main>

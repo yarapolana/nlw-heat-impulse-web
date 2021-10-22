@@ -39,7 +39,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
 
       localStorage.setItem(TOKEN_STORAGE, response.data.token)
 
-      api.defaults.headers.common['Bearer Token']
+      api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`
     })
   }
 
